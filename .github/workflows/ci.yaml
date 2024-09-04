@@ -1,0 +1,35 @@
+name: CI Pipeline
+
+# 언제 워크플로우를 실행할지 정의
+on:
+  # Pull request 이벤트가 발생할 때
+  pull_request:
+    branches:
+      - main
+  # 메인 브랜치로 푸시가 될 때
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 체크아웃 작업을 실행 (레포지토리 코드 가져오기)
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Node.js를 예시로, 필요에 따라 다른 환경으로 변경 가능
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    # 의존성 설치
+    - name: Install dependencies
+      run: npm install
+
+    # 테스트 실행 (테스트 스크립트가 package.json에 정의되어 있다고 가정)
+    - name: Run tests
+      run: npm test
