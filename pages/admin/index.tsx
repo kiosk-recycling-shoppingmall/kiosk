@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import AuthLayout from '../../components/Auth/AuthLayout';
+import AuthLayout from '../../components/Auth/AuthLayout'; // AuthLayout 경로 수정
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +20,14 @@ const AdminLogin = () => {
     });
 
     if (res.ok) {
-      router.push('/admin/dashboard');
+      // 가게 생성 여부를 확인하여 리다이렉션
+      const storeCreated = localStorage.getItem('storeCreated') === 'true';
+      
+      if (storeCreated) {
+        router.push('/admin/dashboard'); // 가게가 있으면 대시보드로 이동
+      } else {
+        router.push('/admin/store/create'); // 가게가 없으면 가게 생성 페이지로 이동
+      }
     } else {
       alert('로그인 실패');
     }
