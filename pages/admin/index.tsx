@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import AuthLayout from '../components/AuthLayout';
+import AuthLayout from '../../components/Auth/AuthLayout';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');

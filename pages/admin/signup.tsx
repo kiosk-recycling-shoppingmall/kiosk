@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router'; // 뒤로 가기 기능을 위해 추가
-import AuthLayout from '../components/AuthLayout';
+import { useRouter } from 'next/router';
+import AuthLayout from '../../components/Auth/AuthLayout';
+import BackButton from '../../components/Buttons/BackButton'; // 뒤로 가기 버튼 추가
 
 const AdminSignup = () => {
   const [email, setEmail] = useState('');
@@ -8,7 +9,7 @@ const AdminSignup = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [businessNumber, setBusinessNumber] = useState('');
-  const router = useRouter(); // useRouter 사용
+  const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,13 +75,7 @@ const AdminSignup = () => {
         </button>
       </form>
 
-      {/* 뒤로 가기 버튼 추가 */}
-      <button
-        onClick={() => router.back()}
-        className="mt-4 w-full bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600"
-      >
-        뒤로 가기
-      </button>
+      <BackButton />
     </AuthLayout>
   );
 };

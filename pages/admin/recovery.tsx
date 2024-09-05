@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router'; // 뒤로 가기 기능을 위해 추가
-import AuthLayout from '../components/AuthLayout';
+import AuthLayout from '../../components/Auth/AuthLayout';
+import BackButton from '../../components/Buttons/BackButton'; // 재사용 가능한 버튼 호출
 
 const Recovery = () => {
   const [activeTab, setActiveTab] = useState<'email' | 'password'>('email');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
-  const router = useRouter(); // useRouter 사용
 
   const handleRecovery = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,13 +86,8 @@ const Recovery = () => {
         </button>
       </form>
 
-      {/* 뒤로 가기 버튼 추가 */}
-      <button
-        onClick={() => router.back()}
-        className="mt-4 w-full bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600"
-      >
-        뒤로 가기
-      </button>
+      {/* 재사용 가능한 "뒤로 가기" 버튼 컴포넌트 */}
+      <BackButton />
     </AuthLayout>
   );
 };
